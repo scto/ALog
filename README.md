@@ -74,7 +74,7 @@ xml                      : log 字符串之 xml
 
 ## How to use
 
-`compile 'com.github.932707629:alog:1.9.2'` or [![Download][jarsvg]][jar]
+`implementation 'com.github.932707629:alog:1.9.2'`
 
 
 ## Usage
@@ -196,4 +196,3 @@ public void initALog() {
 [qq1groupsvg]: https://img.shields.io/badge/QQ1群-25206533-fba7f9.svg
 [qq1group]: https://shang.qq.com/wpa/qunwpa?idkey=d906789f84484465e2736f7b524366b4c23afeda38733d5c7b10fc3f6e406e9b
 
-*/
