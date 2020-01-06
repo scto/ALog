@@ -186,7 +186,7 @@ public void initALog() {
 [xml]: https://raw.githubusercontent.com/Blankj/ALog/master/art/xml.png
 [templates]: https://raw.githubusercontent.com/Blankj/ALog/master/art/alog.gif
 [templates_jar]: https://raw.githubusercontent.com/Blankj/ALog/master/art/alog_templates.jar
-
+```
 [jianshusvg]: https://img.shields.io/badge/简书-Blankj-brightgreen.svg
 [jianshu]: http://www.jianshu.com/u/46702d5c6978
 
@@ -201,3 +201,5 @@ public void initALog() {
 
 [qq1groupsvg]: https://img.shields.io/badge/QQ1群-25206533-fba7f9.svg
 [qq1group]: https://shang.qq.com/wpa/qunwpa?idkey=d906789f84484465e2736f7b524366b4c23afeda38733d5c7b10fc3f6e406e9b
+
+```
