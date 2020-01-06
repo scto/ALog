@@ -1,7 +1,5 @@
 # ALog（同步更新 [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode) 的 [LogUtils](https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/lib/src/main/java/com/blankj/utilcode/util/LogUtils.java)向Blankj大佬致敬）
 
-[![ALog][alogsvg]][alog] [![api][apisvg]][api] [![build][buildsvg]][build] [![License][licensesvg]][license]
-
 ## Functions
 
 * 兼容 Android Studio 3.1.0 的 Logcat 完美显示日志
