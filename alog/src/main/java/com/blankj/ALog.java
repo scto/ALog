@@ -16,7 +16,6 @@ import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.util.SimpleArrayMap;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -36,6 +35,8 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.ref.SoftReference;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -87,28 +88,28 @@ public final class ALog {
 
     private static final int FILE = 0x10;
     private static final int JSON = 0x20;
-    private static final int XML  = 0x30;
+    private static final int XML = 0x30;
 
-    private static final String FILE_SEP       = System.getProperty("file.separator");
-    private static final String LINE_SEP       = System.getProperty("line.separator");
-    private static final String TOP_CORNER     = "┌";
-    private static final String MIDDLE_CORNER  = "├";
-    private static final String LEFT_BORDER    = "│ ";
-    private static final String BOTTOM_CORNER  = "└";
-    private static final String SIDE_DIVIDER   =
+    private static final String FILE_SEP = System.getProperty("file.separator");
+    private static final String LINE_SEP = System.getProperty("line.separator");
+    private static final String TOP_CORNER = "┌";
+    private static final String MIDDLE_CORNER = "├";
+    private static final String LEFT_BORDER = "│ ";
+    private static final String BOTTOM_CORNER = "└";
+    private static final String SIDE_DIVIDER =
             "────────────────────────────────────────────────────────";
     private static final String MIDDLE_DIVIDER =
             "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄";
-    private static final String TOP_BORDER     = TOP_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
-    private static final String MIDDLE_BORDER  = MIDDLE_CORNER + MIDDLE_DIVIDER + MIDDLE_DIVIDER;
-    private static final String BOTTOM_BORDER  = BOTTOM_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
-    private static final int    MAX_LEN        = 1100;// fit for Chinese character
-    private static final String NOTHING        = "log nothing";
-    private static final String NULL           = "null";
-    private static final String ARGS           = "args";
-    private static final String PLACEHOLDER    = " ";
-    private static final Config CONFIG         = new Config();
-    private static Context sAppContext;
+    private static final String TOP_BORDER = TOP_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
+    private static final String MIDDLE_BORDER = MIDDLE_CORNER + MIDDLE_DIVIDER + MIDDLE_DIVIDER;
+    private static final String BOTTOM_BORDER = BOTTOM_CORNER + SIDE_DIVIDER + SIDE_DIVIDER;
+    private static final int MAX_LEN = 1100;// fit for Chinese character
+    private static final String NOTHING = "log nothing";
+    private static final String NULL = "null";
+    private static final String ARGS = "args";
+    private static final String PLACEHOLDER = " ";
+    private static Config CONFIG = null;
+    private static WeakReference<Context> sAppContext = null;
 
     private static SimpleDateFormat simpleDateFormat;
 
@@ -121,7 +122,11 @@ public final class ALog {
     }
 
     public static Config init(@NonNull Context context) {
-        sAppContext=context;
+        sAppContext = new WeakReference<>(context);
+        return CONFIG=new Config();
+    }
+
+    public static Config getConfig() {
         return CONFIG;
     }
 
@@ -596,9 +601,9 @@ public final class ALog {
         String versionName = "";
         int versionCode = 0;
         try {
-            PackageInfo pi = sAppContext
+            PackageInfo pi = sAppContext.get()
                     .getPackageManager()
-                    .getPackageInfo(sAppContext.getPackageName(), 0);
+                    .getPackageInfo(sAppContext.get().getPackageName(), 0);
             if (pi != null) {
                 versionName = pi.versionName;
                 versionCode = pi.versionCode;
@@ -656,33 +661,33 @@ public final class ALog {
     }
 
     public static final class Config {
-        private String      mDefaultDir;// The default storage directory of log.
-        private String      mDir;       // The storage directory of log.
-        private String      mFilePrefix        = "util";// The file prefix of log.
-        private String      mFileExtension     = ".txt";// The file extension of log.
-        private boolean     mLogSwitch         = true;  // The switch of log.
-        private boolean     mLog2ConsoleSwitch = true;  // The logcat's switch of log.
-        private String      mGlobalTag         = "";    // The global tag of log.
-        private boolean     mTagIsSpace        = true;  // The global tag is space.
-        private boolean     mLogHeadSwitch     = true;  // The head's switch of log.
-        private boolean     mLog2FileSwitch    = false; // The file's switch of log.
-        private boolean     mLogBorderSwitch   = true;  // The border's switch of log.
-        private boolean     mSingleTagSwitch   = true;  // The single tag of log.
-        private int         mConsoleFilter     = V;     // The console's filter of log.
-        private int         mFileFilter        = V;     // The file's filter of log.
-        private int         mStackDeep         = 1;     // The stack's deep of log.
-        private int         mStackOffset       = 0;     // The stack's offset of log.
-        private int         mSaveDays          = -1;    // The save days of log.
-        private String      mProcessName;
+        private String mDefaultDir;// The default storage directory of log.
+        private String mDir;       // The storage directory of log.
+        private String mFilePrefix = "util";// The file prefix of log.
+        private String mFileExtension = ".txt";// The file extension of log.
+        private boolean mLogSwitch = true;  // The switch of log.
+        private boolean mLog2ConsoleSwitch = true;  // The logcat's switch of log.
+        private String mGlobalTag = "";    // The global tag of log.
+        private boolean mTagIsSpace = true;  // The global tag is space.
+        private boolean mLogHeadSwitch = true;  // The head's switch of log.
+        private boolean mLog2FileSwitch = false; // The file's switch of log.
+        private boolean mLogBorderSwitch = true;  // The border's switch of log.
+        private boolean mSingleTagSwitch = true;  // The single tag of log.
+        private int mConsoleFilter = V;     // The console's filter of log.
+        private int mFileFilter = V;     // The file's filter of log.
+        private int mStackDeep = 1;     // The stack's deep of log.
+        private int mStackOffset = 0;     // The stack's offset of log.
+        private int mSaveDays = -1;    // The save days of log.
+        private String mProcessName;
         private IFileWriter mFileWriter;
 
         private Config() {
             if (mDefaultDir != null) return;
             if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                    && sAppContext.getExternalCacheDir() != null)
-                mDefaultDir = sAppContext.getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
+                    && sAppContext.get().getExternalCacheDir() != null)
+                mDefaultDir = sAppContext.get().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
             else {
-                mDefaultDir = sAppContext.getCacheDir() + FILE_SEP + "log" + FILE_SEP;
+                mDefaultDir = sAppContext.get().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
             }
         }
 
@@ -802,7 +807,7 @@ public final class ALog {
 
         public final String getProcessName() {
             if (mProcessName == null) {
-                mProcessName=ProcessUtils.getCurrentProcessName(sAppContext);
+                mProcessName = ProcessUtils.getCurrentProcessName(sAppContext.get());
             }
             return mProcessName.replace(":", "_");
         }
@@ -902,9 +907,9 @@ public final class ALog {
     }
 
     private final static class TagHead {
-        String   tag;
+        String tag;
         String[] consoleHead;
-        String   fileHead;
+        String fileHead;
 
         TagHead(String tag, String[] consoleHead, String fileHead) {
             this.tag = tag;
@@ -1234,8 +1239,6 @@ public final class ALog {
         }
         return objClass;
     }
-
-
 
 
 }
