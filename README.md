@@ -1,4 +1,4 @@
-# ALog（同步更新 [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode) 的 [LogUtils](https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/lib/src/main/java/com/blankj/utilcode/util/LogUtils.java)）
+# ALog（同步更新 [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode) 的 [LogUtils](https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/lib/src/main/java/com/blankj/utilcode/util/LogUtils.java)向Blankj大佬致敬）
 
 [![ALog][alogsvg]][alog] [![api][apisvg]][api] [![build][buildsvg]][build] [![License][licensesvg]][license]
 
@@ -74,7 +74,7 @@ xml                      : log 字符串之 xml
 
 ## How to use
 
-`compile 'com.blankj:alog:1.9.1'` or [![Download][jarsvg]][jar]
+`compile 'com.github.932707629:alog:1.9.2'` or [![Download][jarsvg]][jar]
 
 
 ## Usage
