@@ -1,1 +1,1 @@
-include ':app'//, ':alog'
+include ':app', ':alog'

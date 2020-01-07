@@ -24,7 +24,7 @@ android {
 
 dependencies {
     compileOnly deps.appcompatv7
-    compileOnly deps.gson
+//    compileOnly deps.gson
 }
 apply from: "../bintrayUpload.gradle"
 //gradle bintrayUpload

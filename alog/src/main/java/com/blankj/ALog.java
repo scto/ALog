@@ -18,9 +18,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.util.SimpleArrayMap;
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -920,7 +917,7 @@ public final class ALog {
 
     private final static class LogFormatter {
 
-        private static final Gson GSON = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
+//        private static final Gson GSON = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
 
         static String object2String(Object object) {
             return object2String(object, -1);
@@ -1117,11 +1114,7 @@ public final class ALog {
             if (object instanceof CharSequence) {
                 return formatJson(object.toString());
             }
-            try {
-                return GSON.toJson(object);
-            } catch (Throwable t) {
-                return object.toString();
-            }
+            return object.toString();
         }
 
         private static String formatJson(String json) {

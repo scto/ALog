@@ -25,6 +25,6 @@ android {
 dependencies {
     implementation deps.appcompatv7
     implementation deps.gson
-    implementation 'com.github.932707629:alog:1.9.2'
-//    api project(':alog')
+//    implementation 'com.github.932707629:alog:1.9.2'
+    api project(':alog')
 }
