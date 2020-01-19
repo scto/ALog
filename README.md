@@ -72,7 +72,7 @@ xml                      : log 字符串之 xml
 
 ## How to use
 
-`implementation 'com.github.932707629:alog:1.9.3'`
+`implementation 'com.github.932707629:alog:1.9.4'`
 
 
 ## Usage
