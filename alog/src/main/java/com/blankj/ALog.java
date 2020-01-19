@@ -105,7 +105,7 @@ public final class ALog {
     private static final String NULL = "null";
     private static final String ARGS = "args";
     private static final String PLACEHOLDER = " ";
-    private static Config CONFIG = null;
+    private static Config CONFIG = new Config();//默认使用这个设置
     private static WeakReference<Context> sAppContext = null;
 
     private static SimpleDateFormat simpleDateFormat;
@@ -120,7 +120,14 @@ public final class ALog {
 
     public static Config init(@NonNull Context context) {
         sAppContext = new WeakReference<>(context);
-        return CONFIG=new Config();
+        if (CONFIG.mDefaultDir != null)  return CONFIG;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                && sAppContext.get().getExternalCacheDir() != null)
+            CONFIG.mDefaultDir = sAppContext.get().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
+        else {
+            CONFIG.mDefaultDir = sAppContext.get().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
+        }
+        return CONFIG;
     }
 
     public static Config getConfig() {
@@ -595,6 +602,9 @@ public final class ALog {
     }
 
     private static void printDeviceInfo(final String filePath, final String date) {
+        if (sAppContext==null){
+            return;
+        }
         String versionName = "";
         int versionCode = 0;
         try {
@@ -679,13 +689,7 @@ public final class ALog {
         private IFileWriter mFileWriter;
 
         private Config() {
-            if (mDefaultDir != null) return;
-            if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-                    && sAppContext.get().getExternalCacheDir() != null)
-                mDefaultDir = sAppContext.get().getExternalCacheDir() + FILE_SEP + "log" + FILE_SEP;
-            else {
-                mDefaultDir = sAppContext.get().getCacheDir() + FILE_SEP + "log" + FILE_SEP;
-            }
+
         }
 
         public final Config setLogSwitch(final boolean logSwitch) {
@@ -803,6 +807,9 @@ public final class ALog {
         }
 
         public final String getProcessName() {
+            if (sAppContext==null){
+                return "ALog";
+            }
             if (mProcessName == null) {
                 mProcessName = ProcessUtils.getCurrentProcessName(sAppContext.get());
             }
