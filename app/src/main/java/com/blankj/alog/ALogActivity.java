@@ -20,6 +20,7 @@ import java.util.ArrayList;
  *     blog  : http://blankj.com
  *     time  : 2017/04/06
  *     desc  : ALog的Demo
+ *     https://blog.csdn.net/sky837/article/details/78477534  上传开源库到bintray
  * </pre>
  */
 public class ALogActivity extends AppCompatActivity
