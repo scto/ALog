@@ -670,7 +670,7 @@ public final class ALog {
     public static final class Config {
         private String mDefaultDir;// The default storage directory of log.
         private String mDir;       // The storage directory of log.
-        private String mFilePrefix = "util";// The file prefix of log.
+        private String mFilePrefix = "alog";// The file prefix of log.
         private String mFileExtension = ".txt";// The file extension of log.
         private boolean mLogSwitch = true;  // The switch of log.
         private boolean mLog2ConsoleSwitch = true;  // The logcat's switch of log.
@@ -739,7 +739,7 @@ public final class ALog {
 
         public final Config setFilePrefix(final String filePrefix) {
             if (isSpace(filePrefix)) {
-                mFilePrefix = "util";
+                mFilePrefix = "alog";
             } else {
                 mFilePrefix = filePrefix;
             }
