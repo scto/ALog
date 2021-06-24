@@ -1,13 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        jcenter()
+        maven { url "https://www.jitpack.io" }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        mavenCentral()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
+        classpath 'com.android.tools.build:gradle:3.6.4'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -15,7 +19,11 @@ buildscript {
 
 allprojects {
     repositories {
-        jcenter()
+        maven { url "https://www.jitpack.io" }
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        mavenCentral()
         google()
     }
 }
@@ -26,17 +34,15 @@ task clean(type: Delete) {
 
 ext {
 
-    compileSdkVersion = 27
+    compileSdkVersion = 30
     minSdkVersion = 14
-    targetSdkVersion = 19
+    targetSdkVersion = 30
 
-    versionCode = 1_009_005
-    versionName = '1.9.5'
-
-    supportVersion = '27.1.0'
+    versionCode = 1_009_006
+    versionName = '1.9.6'
 
     deps = [
-            appcompatv7: "com.android.support:appcompat-v7:$supportVersion",
-            gson:"com.google.code.gson:gson:2.8.6"
+            appcompatv7: 'androidx.appcompat:appcompat:1.2.0',
+            gson       :"com.google.code.gson:gson:2.8.6"
     ]
 }

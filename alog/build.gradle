@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.932707629'
 android {
     compileSdkVersion rootProject.compileSdkVersion
 
@@ -26,5 +27,5 @@ dependencies {
     compileOnly deps.appcompatv7
 //    compileOnly deps.gson
 }
-apply from: "../bintrayUpload.gradle"
+//apply from: "../bintrayUpload.gradle"
 //gradle bintrayUpload
