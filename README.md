@@ -1,5 +1,20 @@
 # ALog（同步更新 [AndroidUtilCode](https://github.com/Blankj/AndroidUtilCode) 的 [LogUtils](https://github.com/Blankj/AndroidUtilCode/blob/master/utilcode/lib/src/main/java/com/blankj/utilcode/util/LogUtils.java)向Blankj大佬致敬）
 
+## 已发布到jitpack[![](https://jitpack.io/v/932707629/ALog.svg)](https://jitpack.io/#932707629/ALog)
+```
+   //添加jitpack地址到项目根目录的build.gradle
+    allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+    //添加依赖到mudule目录的build.gradle
+	dependencies {
+    	implementation 'com.github.932707629:ALog:1.9.6'
+    }
+```
+
 ## Functions
 
 * 兼容 Android Studio 3.1.0 的 Logcat 完美显示日志
